@@ -52,7 +52,7 @@ classifier.classify(new_datapoint)
 If you wish you can inspect the nearest neighbours that produced this result:
 
 ```ruby
-classifier.nearest_neighbours(new_datapoint)
+classifier.nearest_neighbours_to(new_datapoint)
 ```
 
 
