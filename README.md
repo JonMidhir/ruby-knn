@@ -1,6 +1,8 @@
 # ruby-knn
 Simple kNN Classifier written in Ruby
 
+![Screenshot](https://github.com/JonMidhir/ruby-knn/blob/master/example/screenshot.png?raw=true)
+
 ## Usage
 
 You can start messing about right away by cloning this project and running
