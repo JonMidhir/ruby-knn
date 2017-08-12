@@ -66,7 +66,7 @@ To run the entire test on the 946 examples takes around 15 minutes on a decent m
 ./example/bin/test
 ```
 
-You can also start the console, which loads the environment and provides you with a 'pre-trained' variable `@knn_classifier' to test individual characters against.
+You can also start the console, which loads the environment and provides you with a 'pre-trained' variable `@knn_classifier` to test individual characters against.
 
 ```shell
 ./example/bin/test
