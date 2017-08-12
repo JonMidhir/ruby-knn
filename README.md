@@ -40,14 +40,23 @@ vectors = [
 ] # ...
 
 classifier = KnnClassifier.new(vectors, 3)
-classifier.classify([2,2])
+
+new_datapoint = Vector.new([2,2], nil)
+
+classifier.classify(new_datapoint)
 #> 'apple'
+```
+
+If you wish you can inspect the nearest neighbours that produced this result:
+
+```ruby
+classifier.nearest_neighbours(new_datapoint)
 ```
 
 
 ## Handwriting Example
 
-As mentioned vectors of any size can be used and the example provided in `/examples` is taken from Machine Learning in Action by @pbharrin (https://github.com/pbharrin/machinelearninginaction).
+As mentioned vectors of any size can be used and the example provided in `/examples` is taken from Machine Learning in Action by [@pbharrin](https://github.com/pbharrin) (https://github.com/pbharrin/machinelearninginaction).
 
 To run the entire test on the 946 examples takes around 15 minutes on a decent machine:
 
