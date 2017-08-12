@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+
+require_relative '../vector.rb'
+require_relative '../knn_classifier.rb'
+require 'irb'
+
+ARGV.clear
+IRB.start
+

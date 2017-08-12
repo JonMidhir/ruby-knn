@@ -1,0 +1,20 @@
+#!/usr/bin/env ruby
+
+require_relative '../../vector'
+require_relative '../../knn_classifier'
+
+require 'irb'
+
+source_dir = File.join(__FILE__, '..', '..', 'trainingDigits', '/*')
+
+vectors = Dir[File.expand_path(source_dir)].map do |file|
+  label = file.split('/').last.split('_').first
+  features = File.read(file).split.join.each_char.map(&:to_i)
+
+  Vector.new(features, label)
+end
+
+@knn_classifier = KnnClassifier.new(vectors, 5)
+
+IRB.start
+

@@ -1,0 +1,52 @@
+#!/usr/bin/env ruby
+
+require_relative '../../vector'
+require_relative '../../knn_classifier'
+
+require 'irb'
+
+def vectors_from_dir(dir)
+  dir_location = File.join(__FILE__, '..', '..', dir, '/*')
+
+  Dir[File.expand_path(dir_location)].map do |file|
+    label = file.split('/').last.split('_').first
+    features = File.read(file).split.join.each_char.map(&:to_i)
+
+    Vector.new(features, label)
+  end
+end
+
+source_dir = 'trainingDigits'
+
+knn_classifier = KnnClassifier.new(vectors_from_dir(source_dir), 5)
+
+test_dir = 'testDigits'
+
+test_vectors = vectors_from_dir(test_dir)
+
+puts "Loaded training and test data. Commencing test."
+
+successes = 0
+failures = 0
+completed = 0
+
+test_vectors.each do |vector|
+  result = knn_classifier.classify(vector)
+  
+  printf "Classified as #{result}, expected #{vector.label}. "
+
+  if result == vector.label
+    puts "Success!"
+    successes += 1
+  else
+    puts "Failure!"
+    failures += 1
+  end
+
+  completed += 1
+end
+
+success_rate = (successes / completed.to_f) * 100
+
+puts
+puts "Test completed. #{successes} successes, #{failures} failures. #{success_rate}% success rate."
