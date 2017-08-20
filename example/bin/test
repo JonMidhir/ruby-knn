@@ -1,8 +1,8 @@
 #!/usr/bin/env ruby
 
-require_relative '../../vector'
-require_relative '../../knn_classifier'
+$LOAD_PATH.push File.expand_path("../../../lib", __FILE__)
 
+require 'knn'
 require 'irb'
 
 def vectors_from_dir(dir)
@@ -12,17 +12,17 @@ def vectors_from_dir(dir)
     label = file.split('/').last.split('_').first
     features = File.read(file).split.join.each_char.map(&:to_i)
 
-    Vector.new(features, label)
+    Knn::Vector.new(features, label)
   end
 end
 
 source_dir = 'trainingDigits'
 
-knn_classifier = KnnClassifier.new(vectors_from_dir(source_dir), 5)
+knn_classifier = Knn::Classifier.new(vectors_from_dir(source_dir), 5)
 
 test_dir = 'testDigits'
 
-test_vectors = vectors_from_dir(test_dir)
+test_vectors = vectors_from_dir(test_dir).shuffle
 
 puts "Loaded training and test data. Commencing test."
 

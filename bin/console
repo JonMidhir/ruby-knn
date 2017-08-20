@@ -1,7 +1,8 @@
 #!/usr/bin/env ruby
 
-require_relative '../vector.rb'
-require_relative '../knn_classifier.rb'
+$LOAD_PATH.push File.expand_path("../../lib", __FILE__)
+
+require 'knn'
 require 'irb'
 
 ARGV.clear
