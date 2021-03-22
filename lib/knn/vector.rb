@@ -13,13 +13,15 @@ module Knn
 
     def_delegators :@coordinates, :[], :size
 
+    def sq_distance_to(vector)
+      @coordinates.each_with_index.inject(0) do |acc, (coordinate, index)|
+        cartesian_distance = (coordinate - vector[index])
+        acc + (cartesian_distance * cartesian_distance)
+      end
+    end
+
     def distance_to(vector)
-      Math.sqrt(
-	@coordinates.each_with_index.inject(0) do |acc, (coordinate, index)|
-	  feature_distance = (coordinate - vector[index])**2
-	  acc + feature_distance
-	end
-      )
+      Math.sqrt(sq_distance_to(vector))
     end
   end
 end
