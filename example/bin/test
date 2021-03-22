@@ -4,6 +4,7 @@ $LOAD_PATH.push File.expand_path("../../../lib", __FILE__)
 
 require 'knn'
 require 'irb'
+require 'benchmark'
 
 def vectors_from_dir(dir)
   dir_location = File.join(__FILE__, '..', '..', dir, '/*')
@@ -30,23 +31,26 @@ successes = 0
 failures = 0
 completed = 0
 
-test_vectors.each do |vector|
-  result = knn_classifier.classify(vector)
-  
-  printf "Classified as #{result}, expected #{vector.label}. "
+bm = Benchmark.measure do
+  test_vectors.each do |vector|
+    result = knn_classifier.classify(vector)
+    
+    printf "Classified as #{result}, expected #{vector.label}. "
 
-  if result == vector.label
-    puts "Success!"
-    successes += 1
-  else
-    puts "Failure!"
-    failures += 1
+    if result == vector.label
+      puts "Success!"
+      successes += 1
+    else
+      puts "Failure!"
+      failures += 1
+    end
+
+    completed += 1
   end
-
-  completed += 1
 end
 
 success_rate = (successes / completed.to_f) * 100
 
 puts
 puts "Test completed. #{successes} successes, #{failures} failures. #{success_rate}% success rate."
+puts "Benchmark: #{bm}"

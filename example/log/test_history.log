@@ -1,0 +1,13 @@
+First run:
+
+Test completed. 929 successes, 17 failures. 98.2029598308668% success rate.
+Benchmark: 534.470033   0.022245 534.492278 (534.586797)
+
+Ruby 3:
+
+Test completed. 929 successes, 17 failures. 98.2029598308668% success rate.
+Benchmark: 568.278537   0.004012 568.282549 (568.331618)
+
+Squared Distance:
+
+
