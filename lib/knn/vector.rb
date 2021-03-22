@@ -14,10 +14,10 @@ module Knn
     def_delegators :@coordinates, :[], :size
 
     def sq_distance_to(vector)
-      @coordinates.each_with_index.inject(0) do |acc, (coordinate, index)|
+      @coordinates.each_with_index.map do |coordinate, index|
         cartesian_distance = (coordinate - vector[index])
-        acc + (cartesian_distance * cartesian_distance)
-      end
+        cartesian_distance * cartesian_distance
+      end.sum
     end
 
     def distance_to(vector)
