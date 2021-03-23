@@ -18,3 +18,8 @@ Use * instead of **:
 Test completed. 929 successes, 17 failures. 98.2029598308668% success rate.
 Benchmark: 541.749281   0.019881 541.769162 (541.857714)
 
+Use an injectable calculator class instead of strict OOO:
+
+Test completed. 929 successes, 17 failures. 98.2029598308668% success rate.
+Benchmark: 174.108293   0.024006 174.132299 (174.183970)
+
