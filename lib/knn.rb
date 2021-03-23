@@ -1,4 +1,3 @@
-require 'knn/vector'
 require 'knn/classifier'
 require 'knn/squared_euclidean_calculator'
 
