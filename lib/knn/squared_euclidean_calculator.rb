@@ -1,5 +1,5 @@
 module Knn
-  class SquareEuclideanCalculator
+  class SquaredEuclideanCalculator
     def distance(v1, v2)
       v1.each_with_index.map do |component, index|
         cartesian_distance = (component - v2[index])

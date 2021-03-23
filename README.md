@@ -23,37 +23,48 @@ Or you can start messing about right away by cloning this project and running
 
 ### Vector
 
-Vectors consist of a set of co-ordinates and a label. The array of co-ordinates, representing features, can be any length but when comparing vectors the lengths must match.
-
-The Euclidian distance between two vectors can be calculated like so:
+Vectors are arrays of components, representing features,  where the first element is a label. An example looks like:
 
 ```ruby
-vector1 = Knn::Vector.new([1,2], nil)
-vector2 = Knn::Vector.new([0,0], nil)
+['vegetable', 0, 1, 0, 1, 0, 0, 0]
+```
 
-vector1.distance_to(vector2)
+### Calculating distance between vectors
+
+Distance Calculators can be used to determine the distance between two vectors according to different algorithms. The vectors can be any length but when comparing two the lengths must match.
+
+The Squared Euclidean distance between two vectors can be calculated like so:
+
+```ruby
+vector1 = [nil, 1, 2]
+vector2 = [nil, 0, 0]
+
+SquaredEuclideanCalculator.new.distance(vector1, vector2)
 #> 2.23606797749979
 ```
 
-The distance is always a positive floating-point number.
+The distance is always a positive, floating-point number.
 
 ### Classifier
 
-The `Knn::Classifier` takes an array of Vectors (of the same length), representing the training data, and a value for _k_, the number of neighbours used to classify a data point.
+The `Knn::Classifier` takes an array of vectors (of the same length), representing the training data, a value for _k_, the number of neighbours used to classify a data point, and an optional distance calculator class.
+
+By default, the squared Euclidean distance is used because this produces the
+same accuracy as Euclidean without requiring the expensive square root calculation.
 
 ```ruby
 vectors = [
-  Knn::Vector.new([1,2], 'apple'),
-  Knn::Vector.new([5,5], 'orange'),
-  Knn::Vector.new([0,2], 'apple'),
-  Knn::Vector.new([7,5], 'orange'),
-  Knn::Vector.new([1,1], 'apple'),
-  Knn::Vector.new([6,5], 'orange')
+  ['apple', 1, 2],
+  ['orange', 5, 5],
+  ['apple', 0, 2],
+  ['orange', 7, 5],
+  ['apple', 1, 1],
+  ['orange', 6, 5]
 ] # ...
 
-classifier = Knn::Classifier.new(vectors, 3)
+classifier = Knn::Classifier.new(vectors, 3, distance_calculator = SquaredEuclideanCalculator)
 
-new_datapoint = Knn::Vector.new([2,2], nil)
+new_datapoint = [nil, 2,2]
 
 classifier.classify(new_datapoint)
 #> 'apple'

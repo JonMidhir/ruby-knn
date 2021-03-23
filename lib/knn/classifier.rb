@@ -1,6 +1,6 @@
 module Knn
   class Classifier
-    def initialize(vectors, k, distance_calculator = SquareEuclideanCalculator)
+    def initialize(vectors, k, distance_calculator = SquaredEuclideanCalculator)
       # Expects vectors in format [label, n1, n2, n3, ...]
       @vectors = vectors
       @k = k
