@@ -13,7 +13,8 @@ def vectors_from_dir(dir)
     label = file.split('/').last.split('_').first
     features = File.read(file).split.join.each_char.map(&:to_i)
 
-    Knn::Vector.new(features, label)
+    # Knn::Vector.new(features, label)
+    [label, *features]
   end
 end
 
@@ -35,9 +36,9 @@ bm = Benchmark.measure do
   test_vectors.each do |vector|
     result = knn_classifier.classify(vector)
     
-    printf "Classified as #{result}, expected #{vector.label}. "
+    printf "Classified as #{result}, expected #{vector.first}. "
 
-    if result == vector.label
+    if result == vector.first
       puts "Success!"
       successes += 1
     else
